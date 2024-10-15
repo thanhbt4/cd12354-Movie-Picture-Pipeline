@@ -1,13 +1,13 @@
-name: Frontend Continuous Deployment
+name: MP Frontend CD
 
 on:
-  # This allows running on-demand
+  # This is for running on-demand
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      # This will only run on changes to the frontend code
+      # This will run on changes to the frontend code only
       - 'frontend/**'
 env:
   NODE_VERSION: 18.x
