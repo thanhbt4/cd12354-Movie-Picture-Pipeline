@@ -8,7 +8,7 @@ on:
       - main
     paths:
       # This will only run on changes to the frontend code
-      - "frontend/**"
+      - "starter/frontend/**"
 env:
   NODE_VERSION: 20.x
 
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./starter/frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./starter/frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
@@ -61,7 +61,7 @@ jobs:
     needs: [lint, test]
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./starter/frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
