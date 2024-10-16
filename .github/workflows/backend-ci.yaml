@@ -44,6 +44,8 @@ jobs:
         run: pip install pipenv && pip install flake8
       - name: Install dependencies
         run: pipenv install
+      - name: Run test
+        run: pipenv run test
       - name: Build docker image
         run: |
           docker build -t docker/backend:latest .
