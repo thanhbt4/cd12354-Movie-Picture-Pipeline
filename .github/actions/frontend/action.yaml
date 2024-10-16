@@ -4,8 +4,6 @@ description: 'Reusable steps for frontend'
 runs:
   using: 'composite'
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4.2.1
     - name: Setup NodeJS / Install dependencies
       uses: actions/setup-node@v4.0.4
       with:
