@@ -16,10 +16,10 @@ env:
 jobs:
 
   LINT:
-    uses: ./.github/workflows/frontend-lint.yml
+    uses: ./.github/workflows/frontend-lint.yaml
 
   TEST:
-    uses: ./.github/workflows/frontend-test.yml
+    uses: ./.github/workflows/frontend-test.yaml
     
   BUILD:
     name: BUILD JOB
