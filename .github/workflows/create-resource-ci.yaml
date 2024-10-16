@@ -3,6 +3,9 @@ name: Create AWS resource
 on:
   workflow_dispatch:
 
+env:
+  PYTHON_VERSION: 3.11
+
 jobs:
   terraformat:
     name: Create AWS resource using Terraformat
