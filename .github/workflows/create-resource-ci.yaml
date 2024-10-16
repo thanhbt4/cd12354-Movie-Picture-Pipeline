@@ -1,0 +1,45 @@
+name: Create AWS resource
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraformat:
+    name: Create AWS resource using Terraformat
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./setup/terraform
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.1
+
+      - name: Cache pipenv dependencies
+        uses: actions/cache@v4.1.1
+        with:
+          path: ~/.cache/pipenv
+          key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
+          restore-keys: |
+            pipenv-${{ runner.os }}-
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.2.0
+        with:
+          python-version: ${{env.PYTHON_VERSION}}
+
+      - name: Install pipenv
+        run: |
+          pip install pipenv && pip install flake8
+
+      - uses: hashicorp/setup-terraform@v1
+      
+      - name: terraform plan
+        id: plan
+        run: |
+          terraform init && terraform plan -out=plan.out && terraform show -json plan.out > plan.out.json
+      
+      - name: terraform-compliance
+        uses: terraform-compliance/github_action@main
+        with:
+          plan: plan.out.json
+          features: ssh://git@github.com/terraform-compliance/user-friendly-features.git
