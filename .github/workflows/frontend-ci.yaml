@@ -12,24 +12,10 @@ on:
 
 jobs:
   LINT:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.1
-      - name: Use actions
-        uses: ./.github/actions/frontend
-      - name: Run the npm run lint command
-        run: npm run lint -- --fix
+    uses: ./.github/workflows/frontend-lint.yaml
 
   TEST:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.1
-      - name: Use actions
-        uses: ./.github/actions/frontend
-      - name: Run the npm run test command
-        run: npm run test
+    uses: ./.github/workflows/frontend-test.yaml
     
   BUILD:
     runs-on: ubuntu-latest
@@ -40,8 +26,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
-      - name: Use actions
-        uses: ./.github/actions/frontend
+      - name: Setup NodeJS / Install dependencies
+        uses: actions/setup-node@v4.0.4
+        with:
+          node-version: 20.x
+      - name: Perform a cache action to restore cache before dependency install
+        uses: actions/cache@v4.1.1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm install
       - name: Run the npm run test command
         run: npm run test
       - name: Builds the application using docker
