@@ -1,14 +1,15 @@
 name: MP Frontend CI
 
 on:
-  # This is for running on-demand
-  workflow_dispatch:
   pull_request:
     branches:
       - main
     paths:
       # This will only run on changes to the frontend code
       - "starter/frontend/**"
+  # This is for running on-demand
+  workflow_dispatch:
+  
 env:
   NODE_VERSION: 20.x
 
@@ -23,22 +24,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
-
-      - name: Cache Node.js dependencies
+      - name: Perform a cache action to restore cache before dependency install
         uses: actions/cache@v4.1.1
         with:
           path: ~/.npm
           key: npm-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            npm-
-
-      - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Run ESLint
-        run: |
-          npm run lint -- --fix
+          restore-keys: npm-
+      - name: Setup NodeJS / Install dependencies
+        run: npm install
+      - name: Run the npm run lint command
+        run: npm run lint -- --fix
 
   test:
     name: Frontend Testing
