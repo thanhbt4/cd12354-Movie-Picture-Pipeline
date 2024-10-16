@@ -9,12 +9,8 @@ on:
       - "starter/frontend/**"
   # This is for running on-demand
   workflow_dispatch:
-  
-env:
-  NODE_VERSION: 20.x
 
 jobs:
-
   LINT:
     uses: ./.github/workflows/frontend-lint.yaml
 
