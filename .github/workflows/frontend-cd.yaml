@@ -54,7 +54,7 @@ jobs:
           mask-password: 'true'
       - name: Build and Push docker image to AWS ECR
         env:
-          ECR_REGISTRY: ${{steps.login-ecr.outputs.ECR_REGISTRY}}
+          ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
         run: |
           aws eks update-kubeconfig --name cluster
           export PUBLIC_URL=$(kubectl get svc backend -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}{"\n"}{.status.loadBalancer.ingress[0].ip}')
@@ -89,7 +89,7 @@ jobs:
         working-directory: ./setup
       - name: Kustomize set image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.ECR_REGISTRY }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: kustomize edit set image frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         working-directory: ./starter/frontend/k8s
       - name: K8S apply
