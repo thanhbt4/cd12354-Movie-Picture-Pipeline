@@ -15,10 +15,10 @@ env:
 
 jobs:
   LINT:
-    uses: ./.github/workflows/backtend-lint.yaml
+    uses: ./.github/workflows/backend-lint.yaml
 
   TEST:
-    uses: ./.github/workflows/backtend-test.yaml
+    uses: ./.github/workflows/backend-test.yaml
           
   BUILD:
     name: BUILD JOB
