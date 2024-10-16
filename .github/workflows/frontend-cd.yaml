@@ -139,7 +139,7 @@ jobs:
       - name: Set Docker image in Kustomize
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: mp-frontend
+          REPOSITORY: frontend
           IMAGE_TAG: latest
         run: |
           kustomize edit set image frontend=$REGISTRY/$REPOSITORY:$IMAGE_TAG
