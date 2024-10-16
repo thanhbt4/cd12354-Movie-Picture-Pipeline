@@ -52,3 +52,6 @@ jobs:
       
       - name: terraform-compliance
         uses: terraform-compliance/github_action@0.3.0
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve plan.out.json
