@@ -14,6 +14,8 @@ jobs:
   LINT:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.1
       - name: Use actions
         uses: ./.github/actions/frontend
       - name: Run the npm run lint command
@@ -22,6 +24,8 @@ jobs:
   TEST:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.1
       - name: Use actions
         uses: ./.github/actions/frontend
       - name: Run the npm run test command
@@ -34,6 +38,8 @@ jobs:
       run:
         working-directory: ./starter/frontend
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.1
       - name: Use actions
         uses: ./.github/actions/frontend
       - name: Run the npm run test command
