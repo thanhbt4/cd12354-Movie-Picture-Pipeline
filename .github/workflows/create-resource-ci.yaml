@@ -51,7 +51,4 @@ jobs:
           terraform init && terraform plan -out=plan.out && terraform show -json plan.out > plan.out.json
       
       - name: terraform-compliance
-        uses: terraform-compliance/github_action@main
-        with:
-          plan: plan.out.json
-          features: ./setup/terraform
+        uses: terraform-compliance/github_action@0.3.0
