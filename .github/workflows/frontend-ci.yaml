@@ -12,10 +12,18 @@ on:
 
 jobs:
   LINT:
-    uses: ./.github/workflows/frontend-lint.yaml
+    steps:
+      - name: Use actions
+        uses: uses: ./.github/actions/frontend
+      - name: Run the npm run lint command
+        run: npm run lint -- --fix
 
   TEST:
-    uses: ./.github/workflows/frontend-test.yaml
+    steps:
+      - name: Use actions
+        uses: uses: ./.github/actions/frontend
+      - name: Run the npm run test command
+        run: npm run test
     
   BUILD:
     name: BUILD JOB
@@ -25,20 +33,8 @@ jobs:
       run:
         working-directory: ./starter/frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.1
-      - name: Setup NodeJS / Install dependencies
-        uses: actions/setup-node@v4.0.4
-        with:
-          node-version: 20.x
-      - name: Perform a cache action to restore cache before dependency install
-        uses: actions/cache@v4.1.1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: npm install
+      - name: Use actions
+        uses: uses: ./.github/actions/frontend
       - name: Run the npm run test command
         run: npm run test
       - name: Builds the application using docker
