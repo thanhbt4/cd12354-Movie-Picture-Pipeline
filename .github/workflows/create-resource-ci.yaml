@@ -34,7 +34,7 @@ jobs:
         run: |
           pip install pipenv && pip install flake8
 
-      - uses: hashicorp/setup-terraform@v1
+      - uses: hashicorp/setup-terraform@v2.0.3
       
       - name: terraform plan
         id: plan
