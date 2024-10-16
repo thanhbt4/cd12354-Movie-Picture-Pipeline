@@ -134,7 +134,7 @@ jobs:
       - name: Run init.sh
         run:  |
           ./init.sh || true
-        working-directory: ./starter/setup
+        working-directory: ./setup
 
       - name: Set Docker image in Kustomize
         env:
