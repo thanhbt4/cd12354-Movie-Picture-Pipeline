@@ -48,5 +48,5 @@ jobs:
         run: pipenv run lint
       - name: Build docker image
         run: |
-          docker build -t docker/$backend:latest .
+          docker build -t docker/backend:latest .
           docker images
