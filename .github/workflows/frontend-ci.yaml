@@ -12,21 +12,22 @@ on:
 
 jobs:
   LINT:
+    runs-on: ubuntu-latest
     steps:
       - name: Use actions
-        uses: uses: ./.github/actions/frontend
+        uses: ./.github/actions/frontend
       - name: Run the npm run lint command
         run: npm run lint -- --fix
 
   TEST:
+    runs-on: ubuntu-latest
     steps:
       - name: Use actions
-        uses: uses: ./.github/actions/frontend
+        uses: ./.github/actions/frontend
       - name: Run the npm run test command
         run: npm run test
     
   BUILD:
-    name: BUILD JOB
     runs-on: ubuntu-latest
     needs: [LINT, TEST]
     defaults:
@@ -34,7 +35,7 @@ jobs:
         working-directory: ./starter/frontend
     steps:
       - name: Use actions
-        uses: uses: ./.github/actions/frontend
+        uses: ./.github/actions/frontend
       - name: Run the npm run test command
         run: npm run test
       - name: Builds the application using docker
